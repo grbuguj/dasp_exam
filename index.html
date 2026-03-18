@@ -292,7 +292,7 @@ const SUBJECTS=[
   {id:2,label:'과목 2',name:'데이터 요건 분석',color:'#22c55e',bg:'rgba(34,197,94,.12)'},
   {id:3,label:'과목 3',name:'데이터 표준화',color:'#f59e0b',bg:'rgba(245,158,11,.12)'},
   {id:4,label:'과목 4',name:'데이터 모델링',color:'#ec4899',bg:'rgba(236,72,153,.12)'},
-  {id:0,label:'전체',name:'전체 랜덤 (1+2+3)',color:'#a78bfa',bg:'rgba(167,139,250,.12)'},
+  {id:0,label:'전체',name:'전체 랜덤 (1+2+3+4)',color:'#a78bfa',bg:'rgba(167,139,250,.12)'},
 ];
 const S={
   page:{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',padding:'0 16px 40px'},
@@ -301,7 +301,7 @@ const S={
 };
 function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
 function buildQuiz(sid,mode){
-  let pool=sid===0?[...Q[1],...Q[2],...Q[3]]:[...Q[sid]];
+  let pool=sid===0?[...Q[1],...Q[2],...Q[3],...Q[4]]:[...Q[sid]];
   pool=shuffle(pool);
   if(mode==='rand20')pool=pool.slice(0,Math.min(20,pool.length));
   return pool;
@@ -325,7 +325,7 @@ function HomeScreen({onStart}){
       </div>
       <div style={{width:'100%',display:'flex',flexDirection:'column',gap:10,marginBottom:20}}>
         {SUBJECTS.map((s,i)=>{
-          const cnt=s.id===0?Q[1].length+Q[2].length+Q[3].length:(Q[s.id]?.length??0);
+          const cnt=s.id===0?Q[1].length+Q[2].length+Q[3].length+Q[4].length:(Q[s.id]?.length??0);
           const sel=selSubj===s.id;
           return(
             <button key={s.id} onClick={()=>setSelSubj(s.id)} style={{...S.card,display:'flex',alignItems:'center',gap:14,textAlign:'left',background:sel?s.bg:'var(--surface)',border:`1px solid ${sel?s.color:'var(--border)'}`,cursor:'pointer',padding:'16px 20px'}}>
